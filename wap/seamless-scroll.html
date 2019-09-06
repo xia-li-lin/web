@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>无缝滚动</title>
+    <link rel="stylesheet" href="./css/seamless-scroll.css">
+</head>
+<body>
+<section class="wrap">
+    <ul class="list">
+        <li>
+            <img src="./images/banner1.jpg" alt="">
+        </li>
+        <li>
+            <img src="./images/banner2.jpg" alt="">
+        </li>
+        <li>
+            <img src="./images/banner3.jpg" alt="">
+        </li>
+        <li>
+            <img src="./images/banner4.jpg" alt="">
+        </li>
+    </ul>
+    <nav>
+        <a href="javascript:;" class="active"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+        <a href="javascript:;"></a>
+    </nav>
+</section>
+<script>
+    var html=document.documentElement;
+    html.style.fontSize=html.clientWidth/15+'px';
+    document.addEventListener('touchstart',function (ev) {
+        if(ev.cancelable){
+            if(!ev.defaultPrevented){
+                ev.preventDefault();
+            }
+        }
+    },{ passive: false });
+
+    var wrap=document.querySelector('.wrap');
+    var list=document.querySelector('.list');
+    var aA=document.querySelectorAll('a');
+    var disX=0; // 按下的坐标
+    var listL=0;    // 当前按下的list的left值
+    var w=wrap.clientWidth; // 一张图片的宽度
+    var len=0;
+    var n=0;
+
+    list.innerHTML+=list.innerHTML;
+    len=list.children.length;
+    list.style.width=len*w+'px';
+    
+
+    list.addEventListener('touchstart',start);
+    list.addEventListener('touchmove',move);
+    list.addEventListener('touchend',end);
+    function start(ev) {
+        var e=ev.changedTouches[0];
+        disX=e.pageX;
+        list.style.transition='none';
+        var num=Math.round(list.offsetLeft/w);
+        if(num==0){
+            num=aA.length;
+            list.style.left=-num*w+'px';
+        }
+        if(-num==len-1){
+            num=aA.length-1;
+            list.style.left=-num*w+'px';
+        }
+        listL=this.offsetLeft;
+    }
+
+    function move(ev) {
+        var e=ev.changedTouches[0];
+        list.style.left=(e.pageX-disX)+listL+'px';
+    }
+
+    function end() {
+        var num=Math.round(list.offsetLeft/w);
+        list.style.transition='.5';
+        list.style.left=num*w+'px';
+        aA[n].className='';
+        aA[-num%aA.length].className='active';
+        n=-num%aA.length;
+    }
+
+</script>
+</body>
+</html>

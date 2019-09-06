@@ -45,7 +45,10 @@
     },{passive:false});
     oDiv.addEventListener('touchstart',start);
     function start(ev) {
-        this.innerHTML=ev.touches.length;
+        // this.innerHTML=ev.touches.length;
+        // this.innerHTML=ev.targetTouches.length;
+        this.innerHTML=ev.changedTouches.length;
+        console.log(ev);
     }
 </script>
 </body>

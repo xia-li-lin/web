@@ -1,0 +1,44 @@
+* { touch-action: none; }
+body{
+    margin: 0;
+}
+.wrap{
+    height: 4.68rem;
+    position: relative;
+}
+.list{
+    padding: 0;
+    margin: 0;
+    width:400%;
+    position: absolute;
+    top:0;
+    left:0;
+    list-style: none;
+}
+.list li{
+    float: left;
+    width:15rem;
+}
+.list img{
+    width:15rem;
+    display: block;
+}
+nav{
+    width:15rem;
+    height: 10px;
+    position: absolute;
+    bottom:5px;
+    z-index: 1;
+    text-align:center;
+}
+nav a{
+    width:15px;
+    height: 15px;
+    display: inline-block;
+    background: red;
+    border-radius:50%;
+    vertical-align:top;
+}
+nav a.active{
+    background:#fff;
+}
