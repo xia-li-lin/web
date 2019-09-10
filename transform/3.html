@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>matrix-矩阵（rotate）</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #wrap {
+            width: 100px;
+            border: 1px solid #000;
+            padding: 100px;
+        }
+
+        #wrap div {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            transform-origin: 0 0;
+        }
+
+        #wrap div:nth-of-type(1) {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div></div>
+        <div></div>
+    </div>
+
+    <script>
+        let [a1, b1, c1, d1, e1, f1] = [1, 0, 0, 1, 0, 0];
+        let [a2, b2, c2, d2, e2, f2] = [1, 0, 0, 1, 0, 0];
+        let deg1=30;
+        let deg2=45;
+        let wrap = document.querySelector('#wrap');
+        let aDiv = wrap.querySelectorAll('div');
+
+        a1=Math.cos(deg1*Math.PI/180);
+        b1=Math.sin(deg1*Math.PI/180);
+        c1=-Math.sin(deg1*Math.PI/180);
+        d1=Math.cos(deg1*Math.PI/180);
+        e1 =0;
+        f1 = 0;
+
+        aDiv[0].style.webkitTransform=aDiv[0].style.transform=`rotate(${deg1}deg)`;
+        // aDiv[0].style.webkitTransform = aDiv[0].style.transform = `matrix(${a1},${b1},${c1},${d1},${e1},${f1})`;
+        console.log(getComputedStyle(aDiv[0]).transform);
+
+        a2=Math.cos(deg2*Math.PI/180);
+        b2=Math.sin(deg2*Math.PI/180);
+        c2=-Math.sin(deg2*Math.PI/180);
+        d2=Math.cos(deg2*Math.PI/180);
+        e2=0;
+        f2=0;
+
+        aDiv[1].style.webkitTransform = aDiv[1].style.transform = `rotate(${deg2}deg)`;
+        // aDiv[1].style.webkitTransform = aDiv[1].style.transform = `matrix(${a2},${b2},${c2},${d2},${e2},${f2})`;
+        console.log(getComputedStyle(aDiv[1]).transform);
+
+        console.log(.5*180/Math.PI);
+        console.log(1.5*180/Math.PI);
+        
+    </script>
+</body>
+
+</html>
