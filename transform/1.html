@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>matrix-矩阵（位移/缩放）</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #wrap {
+            width: 100px;
+            border: 1px solid #000;
+            padding: 100px;
+        }
+
+        #wrap div {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            transform-origin: 0 0;
+        }
+
+        #wrap div:nth-of-type(1) {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div></div>
+        <div></div>
+    </div>
+
+    <script>
+        let [a1, b1, c1, d1, e1, f1] = [1, 0, 0, 1, 0, 0];
+        let [a2, b2, c2, d2, e2, f2] = [1, 0, 0, 1, 0, 0];
+        let wrap = document.querySelector('#wrap');
+        let aDiv = wrap.querySelectorAll('div');
+
+        a1=.5;
+        b1=0;
+        c1=0;
+        d1=.5;
+        e1 = 100*.5;
+        f1 = 100*.5;
+
+        // 先位移x 100px y 100px 再缩放.5
+        // aDiv[0].style.webkitTransform=aDiv[0].style.transform=`scale(.5) translate(100px,100px)`;
+        aDiv[0].style.webkitTransform = aDiv[0].style.transform = `matrix(${a1},${b1},${c1},${d1},${e1},${f1})`;
+        console.log(getComputedStyle(aDiv[0]).transform);
+
+        a2=.5;
+        b2=0;
+        c2=0;
+        d2=.5;
+        e2=100;
+        f2=100;
+
+        // 先缩放.5 再位移x 100px y 100px 
+        aDiv[1].style.webkitTransform = aDiv[1].style.transform = `translate(100px,100px) scale(.5)`;
+        // aDiv[1].style.webkitTransform = aDiv[1].style.transform = `matrix(${a2},${b2},${c2},${d2},${e2},${f2})`;
+        console.log(getComputedStyle(aDiv[1]).transform);
+        
+    </script>
+</body>
+
+</html>
