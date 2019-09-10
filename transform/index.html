@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{margin: 0;}
+        body,
+        html{
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        header{
+            height: 40px;
+            font-size: 20px;
+            line-height: 40px;
+            color: #fff;
+            text-align: center;
+            background: rgba(0,0,0,1);
+        }
+        #wrap{
+            position: absolute;
+            top: 40px;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: hidden;
+        }
+        #wrap #list{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #list li{
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px solid #000;
+            padding: 0 15px;
+        }
+    </style>
+</head>
+<body>
+   <header>头部栏目</header>
+   <div id="wrap">
+       <ul id="list"></ul>
+   </div> 
+
+   <script>
+   (function(){
+       document.addEventListener('touchstart',function(ev){
+           ev.preventDefault();
+       },{passive:false});
+
+       var wrap=document.querySelector('#wrap');
+       var list=document.querySelector('#list');
+       var startPoint=0;
+       var startEle=0;
+       var elTranslateY=0;
+
+       list.addEventListener('touchstart',function(e){
+           startPoint=e.changedTouches[0].pageY;
+           startEle=elTranslateY;
+       });
+       list.addEventListener('touchmove',function(e){
+           var nowPoint=e.changedTouches[0].pageY;
+           var dis=nowPoint-startPoint;
+           elTranslateY=startEle+dis;
+           this.style.webkitTransform=this.style.transform='translateY('+elTranslateY+'px)';
+       });
+       list.addEventListener('touchend',function(e){
+           
+       });
+
+       setListInnerHTML(list);
+       
+   })();
+
+   function setListInnerHTML(elem){
+       var html='';
+       for(var i=0;i<100;i++){
+            html+=`<li>这是第${i+1}个li</li>`;
+       }
+       elem.innerHTML=html;
+   }
+   </script>
+</body>
+</html>
