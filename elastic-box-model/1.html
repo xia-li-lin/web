@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{margin: 0;}
+    .rows{
+        border: 1px solid palevioletred;
+        height: 300px;
+
+        display: -webkit-box;
+        /* -webkit-box-orient:vertical;
+        -webkit-box-direction: reverse;
+        -webkit-box-pack:justify;
+        -webkit-box-align: center; */
+
+        /* display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: row wrap; */
+    }
+    .rows div{
+        background: greenyellow;
+        width: 3rem;
+        height: 50px;
+        line-height: 50px;
+        color: #fff;
+        text-align: center;
+        /* flex-grow: 1; */
+        /* order: 1; */
+
+        -webkit-box-flex: 1;
+        -webkit-box-ordinal-group: 1;
+        -webkit-box-direction: reverse;
+    }
+    .rows div:nth-of-type(1){-webkit-box-ordinal-group: 5;}
+    .rows div:nth-of-type(2){-webkit-box-ordinal-group: 2;}
+    .rows div:nth-of-type(3){-webkit-box-ordinal-group: 3;}
+    .rows div:nth-of-type(4){-webkit-box-ordinal-group: 4;}
+    </style>
+</head>
+<body>
+    <div class="rows">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+    </div>
+    
+    <script>
+    (function(){
+        var html=document.documentElement;
+        var htmlWidth=html.getBoundingClientRect().width;
+        html.style.fontSize=htmlWidth/15+'px';
+    })();
+    </script>
+</body>
+</html>
