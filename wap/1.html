@@ -5,16 +5,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>移动端点透事件原理</title>
     <script>
-        // (function () {
-        //     var html=document.documentElement;
-        //     var hWidth=html.getBoundingClientRect().width;
-        //     html.style.fontSize= hWidth/16 + 'px';
-        //
-        // })();
+        (function () {
+            var html=document.documentElement;
+            var hWidth=html.getBoundingClientRect().width;
+            html.style.fontSize= hWidth/16 + 'px';
+
+        })();
     </script>
     <style>
+        /**{touch-action: pan-y;}*/
         body{
             margin: 0;
         }
@@ -24,32 +25,54 @@
             height: 100%;
             overflow: hidden;
         }
-        #oDiv{
+        div{
             width: 200px;
             height: 200px;
-            background: plum;
-            font-size: 50px;
-            color: #fff;
             position: absolute;
             top: 0;
             left: 0;
+            opacity: .5;
+            background: mediumvioletred;
+        }
+        #oDiv1{
+            width: 3000px;
+            height: 50px;
+            background: aquamarine;
         }
     </style>
 </head>
 <body>
-<div id="oDiv"></div>
-<script>
-    var oDiv=document.getElementById('oDiv');
-    document.addEventListener('touchstart',function (ev) {
-        ev.preventDefault();
-    },{passive:false});
-    oDiv.addEventListener('touchstart',start);
-    function start(ev) {
-        // this.innerHTML=ev.touches.length;
-        // this.innerHTML=ev.targetTouches.length;
-        this.innerHTML=ev.changedTouches.length;
-        console.log(ev);
-    }
-</script>
+<!--    <p id="oP">点我啊</p>-->
+    <a href="http://www.miaov.com">妙味课堂</a>
+    <div id="oDiv"></div>
+    <div id="oDiv1"></div>
+    <script>
+        var oDiv=document.getElementById('oDiv');
+        var oP=document.getElementById('oP');
+        var oA=document.getElementsByTagName('a')[0];
+        // oDiv.addEventListener('touchstart',function () {
+        //    console.log('开始');
+        // });
+        // oDiv.addEventListener('touchmove',function () {
+        //    console.log('移动');
+        // });
+        // oDiv.addEventListener('mouseup',function () {
+        //     console.log('鼠标抬起');
+        // });
+        document.addEventListener('touchstart',function (ev) {
+           ev.preventDefault();
+        },{passive:false});
+        oDiv.addEventListener('touchend',function () {
+            this.style.display='none';
+            console.log('抬起');
+        });
+        // oP.addEventListener('touchstart',function () {
+        //    console.log(1);
+        // });
+        oA.addEventListener('touchstart',function () {
+            window.location.href='http://www.miaov.com';
+        })
+
+    </script>
 </body>
 </html>

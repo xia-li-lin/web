@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+}
+body,
+html{
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+header,
+footer{
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.8rem;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+#wrap{
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    bottom: 2rem;
+    overflow: hidden;
+}
+#list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .8rem;
+}
+#list li{
+    border-bottom: 1px solid #000;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    padding: 0 0.75rem;
+}
+footer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

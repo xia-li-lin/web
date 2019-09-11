@@ -1,78 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script>
-        (function () {
-            var html=document.documentElement;
-            var hWidth=html.getBoundingClientRect().width;
-            html.style.fontSize= hWidth/16 + 'px';
-
-        })();
-    </script>
-    <style>
-        /**{touch-action: pan-y;}*/
-        body{
-            margin: 0;
-        }
-        body,
-        html{
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        div{
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: .5;
-            background: mediumvioletred;
-        }
-        #oDiv1{
-            width: 3000px;
-            height: 50px;
-            background: aquamarine;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/index.css">
 </head>
-<body>
-<!--    <p id="oP">点我啊</p>-->
-    <a href="http://www.miaov.com">妙味课堂</a>
-    <div id="oDiv"></div>
-    <div id="oDiv1"></div>
-    <script>
-        var oDiv=document.getElementById('oDiv');
-        var oP=document.getElementById('oP');
-        var oA=document.getElementsByTagName('a')[0];
-        // oDiv.addEventListener('touchstart',function () {
-        //    console.log('开始');
-        // });
-        // oDiv.addEventListener('touchmove',function () {
-        //    console.log('移动');
-        // });
-        // oDiv.addEventListener('mouseup',function () {
-        //     console.log('鼠标抬起');
-        // });
-        document.addEventListener('touchstart',function (ev) {
-           ev.preventDefault();
-        },{passive:false});
-        oDiv.addEventListener('touchend',function () {
-            this.style.display='none';
-            console.log('抬起');
-        });
-        // oP.addEventListener('touchstart',function () {
-        //    console.log(1);
-        // });
-        oA.addEventListener('touchstart',function () {
-            window.location.href='http://www.miaov.com';
-        })
 
+<body>
+    <header id="header">头部栏目</header>
+    <section id="wrap">
+        <ul id="list"></ul>
+    </section>
+    <footer id="footer">底部栏目</footer>
+
+    <script src="./js/m.Tween.js"></script>
+    <script>
+        document.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        window.onload = function () {
+            var html = document.documentElement;
+            var htmlWidth = html.getBoundingClientRect().width;
+            html.style.fontSize = htmlWidth / 16 + 'px';
+
+            var wrap = document.querySelector('#wrap');
+            var list = document.querySelector('#list');
+            var scrollBar = document.createElement('div');
+            createHTML(list);
+
+            css(list, 'translateZ', 0.01);
+            var startPoint = 0;
+            var startEl = 0;
+            var lastY = 0;
+            var lastDis = 0;
+            var lastTime = 0;
+            var lastTimeDis = 0;
+            var maxTranslate = wrap.clientHeight - list.offsetHeight;
+            var scale = wrap.clientHeight / list.offsetHeight;
+            scrollBar.style.cssText = `
+                width:6px;
+                background:rgba(0,0,0,.5);
+                position:absolute;
+                right:0;
+                top:0;
+                border-radius:3px;
+                height:100px;
+                opacity:0;
+                transition:.3s opacity;
+            `;
+            wrap.appendChild(scrollBar);
+            list.addEventListener('touchstart', function (e) {
+                maxTranslate = wrap.clientHeight - list.offsetHeight;
+                scale = wrap.clientHeight / list.offsetHeight;
+                scrollBar.style.height = wrap.clientHeight * scale;
+                clearInterval(this.timer);
+                startPoint = e.changedTouches[0].pageY;
+                startEl = css(this, 'translateY');
+                lastY = startEl;
+                lastDis = 0;
+                lastTime = new Date().getTime();
+                scrollBar.style.opacity = 1;
+            });
+
+            list.addEventListener('touchmove', function (e) {
+                var nowTime = new Date().getTime();
+                var nowPoint = e.changedTouches[0].pageY;
+                var dis = nowPoint - startPoint;
+                var translateY = startEl + dis;
+                css(this, 'translateY', translateY);
+                lastDis = translateY - lastY;
+                lastY = translateY;
+                lastTimeDis = nowTime - lastTime;
+                lastTime = nowTime;
+            });
+
+            list.addEventListener('touchend', function (e) {
+                var type = 'easeOut';
+                var speed = Math.round(lastDis / lastTimeDis * 10);
+                speed = lastTimeDis <= 0 ? 0 : speed;
+                var target = Math.round(speed * 20 + css(this, 'translateY'));
+                // console.log(target);
+                if (target > 0) {
+                    target = 0;
+                    type = 'backOut';
+                } else if (target < maxTranslate) {
+                    target = maxTranslate;
+                }
+                MTween({
+                    el: this,
+                    target: {
+                        translateY: target
+                    },
+                    time: Math.round(Math.abs(target - css(this, 'translateY'))) * 2,
+                    type: type,
+                    callBack: function () {
+                        scrollBar.style.opacity = 0;
+                    }
+                });
+            });
+        };
+
+        function createHTML(elem) {
+            var html = ``;
+            for (var i = 0; i < 100; i++) {
+                html += `<li>这是第${i + 1}个li</li>`;
+            }
+            elem.innerHTML = html;
+        }
     </script>
 </body>
+
 </html>
