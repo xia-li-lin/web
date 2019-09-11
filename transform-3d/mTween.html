@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            padding: 100px;
+            border: 1px solid #000;
+            -webkit-perspective: 200px;
+            perspective: 200px;
+        }
+
+        #div {
+            width: 100px;
+            height: 100px;
+            background: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="div"></div>
+    </div>
+
+    <script src="./js/m.Tween.js"></script>
+    <script>
+        function fn1() {
+            MTween({
+                el: div,
+                time: 2000,
+                target: {
+                    scale: 0,
+                    rotate: 720
+                },
+                type: 'bounceOut',
+                callBack: fn2
+            });
+
+        }
+        function fn2() {
+            MTween({
+                el: div,
+                time: 2000,
+                target: {
+                    scale: 100,
+                    rotate: 0
+                },
+                type: 'bounceOut',
+                callBack: fn1
+            });
+
+        }
+        window.onload = function () {
+            let box = document.querySelector('#box');
+            let div = document.querySelector('#div');
+
+            div.addEventListener('touchend', function (e) {
+                fn1();
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+@-webkit-keyframes rotate{
+    0%{
+        -webkit-transform: rotateY(360deg);
+        transform: rotateY(0deg);
+    }
+    100%{
+        -webkit-transform: rotateY(360deg);
+        transform: rotateY(360deg);
+    }
+}
+@keyframes rotate{
+    0%{
+        -webkit-transform: rotateY(360deg);
+        transform: rotateY(0deg);
+    }
+    100%{
+        -webkit-transform: rotateY(360deg);
+        transform: rotateY(360deg);
+    }
+}
+body{
+    margin: 0;
+}
+body,
+html{
+    height: 100%;
+    position: relative;
+}
+#loading{
+    height: 100%;
+    position: relative;
+    -webkit-perspective: 300px;
+    perspective: 300px;
+}
+#logo1,
+#logo2{
+    position: absolute;
+    top:40%;
+    left: 30%;
+    width: 40%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    display: none;
+}
+#loading img{
+    display: block;
+    width: 100%;
+    -webkit-animation: 2s infinite linear rotate;
+    animation: 2s infinite linear rotate;
+}

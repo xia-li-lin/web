@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            padding: 100px;
+            border: 1px solid #000;
+            -webkit-perspective: 200px;
+            perspective: 200px;
+        }
+
+        #div {
+            width: 100px;
+            height: 100px;
+            background: orangered;
+            transition: .5s;
+            /* -webkit-transform: rotate(60deg);
+        transform: rotate(60deg); */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="div"></div>
+    </div>
+
+    <script src="./js/transform.js"></script>
+    <script>
+        window.onload = function () {
+            let box = document.querySelector('#box');
+            let div = document.querySelector('#div');
+
+            div.addEventListener('touchend',function(e){
+                let deg=cssTransform(this,'rotate');
+                deg+=30;
+                cssTransform(this,'rotate',deg);
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>transform - 3D</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #wrap {
+            width: 100px;
+            border: 1px solid #000;
+            padding: 100px;
+            /* 景深 */
+            -webkit-perspective: 200px;
+            perspective: 200px;
+        }
+
+        #wrap div {
+            width: 100px;
+            height: 100px;
+            /* background: orange; */
+            transition: 3s;
+            /* 元素在做3D变化时，是否保留子元素的3D变换 */
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        #wrap div span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            font-size: 50px;
+            text-align: center;
+            color: #fff;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform-style:preserve-3d; 
+            transform-style:preserve-3d; 
+        }
+
+        #wrap div span:nth-of-type(1) {
+            background: purple;
+            -webkit-transform:rotateY(0deg);
+            transform:rotateY(0deg);
+        }
+        #wrap div span:nth-of-type(2) {
+            background: greenyellow;
+            -webkit-transform:rotateY(180deg);
+            transform:rotateY(180deg);
+        }
+        #wrap div span em{
+            line-height: 100px;
+            display: block;
+            font-style: normal;
+            -webkit-transform:translateZ(10px);
+            transform:translateZ(10px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div>
+            <span><em>正</em></span>
+            <span><em>反</em></span>
+        </div>
+        <!-- <div></div> -->
+    </div>
+
+    <script>
+        document.addEventListener('touchstart', function (ev) {
+            ev.preventDefault();
+        }, { passive: false });
+
+        window.onload = function () {
+            let wrap = document.querySelector('#wrap');
+            let aDiv = wrap.querySelectorAll('div');
+
+            aDiv[0].addEventListener('touchend', function () {
+                this.style.webkitTransform = this.style.transform = `rotateY(360deg)`;
+            })
+        }
+
+    </script>
+</body>
+
+</html>

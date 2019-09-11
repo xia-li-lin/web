@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/transform-animation.css">
+</head>
+
+<body>
+    <div id="loading">
+        <div id="logo1">
+            <img src="./images/logo1.png" alt="">
+        </div>
+        <div id="logo2">
+            <img src="./images/logo2.png" alt="">
+        </div>
+    </div>
+</body>
+
+<script src="./js/m.Tween.js"></script>
+<script>
+    let loading = document.querySelector('#loading');
+    let log1 = document.querySelector('#logo1');
+    let log2 = document.querySelector('#logo2');
+
+    css(log1, 'translateZ', -1000);
+    css(log2, 'translateZ', -1000);
+
+    anmt1();
+
+    function anmt1() {
+        logo1.style.display = 'block';
+        MTween({
+            el: log1,
+            time: 200,
+            target: {
+                translateZ: 0
+            },
+            type: 'easeIn',
+            callBack: anmt2()
+        });
+    }
+
+    function anmt2() {
+        setTimeout(function () {
+            MTween({
+                el: log1,
+                time: 1200,
+                target: {
+                    translateZ: -1000
+                },
+                type: 'easeOut',
+                callBack:function(){
+                    logo1.style.display = 'none'; 
+                    anmt3();
+                }
+            });
+        }, 2000);
+    }
+
+    function anmt3() {
+        logo2.style.display = 'block';
+        MTween({
+            el: log2,
+            time: 200,
+            target: {
+                translateZ: 0
+            },
+            type: 'easeIn',
+            callBack:anmt4()
+        });
+    }
+
+    function anmt4() {
+        setTimeout(function () {
+            MTween({
+                el: log2,
+                time: 1200,
+                target: {
+                    translateZ: -1000
+                },
+                type: 'easeOut',
+				callBack: function(){
+					anmt1()
+					logo2.style.display = "none";
+				}
+            });
+        }, 2000);
+    }
+</script>
+
+</html>
