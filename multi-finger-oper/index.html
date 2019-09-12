@@ -19,14 +19,21 @@
     <div id="box"></div>
 
     <script>
+    document.addEventListener('touchstart',function(e){
+        e.preventDefault();
+    },{passive:false});
     window.onload=function(){
         var box=document.querySelector('#box');
 
         /*
-        gesturestart 当前手指触摸元素，两根或两根以上手指执行
+        gesturestart 当前手指触摸元素，当前屏幕上有两根或两根以上的手指执行
         */
         box.addEventListener('gesturestart',function(e){
             this.style.background='orange';
+        });
+
+        box.addEventListener('gestureend',function(e){
+            this.style.background='greenyellow';
         });
     }
     </script>
