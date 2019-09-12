@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 200px;
+        height: 200px;
+        background: greenyellow;
+        color: #fff;
+        font-size: 30px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+
+    <script>
+    window.onload=function(){
+        var box=document.querySelector('#box');
+
+        /*
+        gesturestart 当前手指触摸元素，两根或两根以上手指执行
+        */
+        box.addEventListener('gesturestart',function(e){
+            this.style.background='orange';
+        });
+    }
+    </script>
+</body>
+</html>
