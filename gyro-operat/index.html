@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 200px;
+        height: 200px;
+        background: orange;
+        color: #fff;
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        (function(){
+            var box=document.querySelector('#box');
+            window.addEventListener('devicemotion',function(e){
+                var motion=e.accelerationIncludingGravity;
+                var x=motion.x;
+                var y=motion.y;
+                var z=motion.z;
+                box.innerHTML=`x:${x}<br/>y:${y}<br/>z:${z}`;
+            });
+        })();
+    </script>
+</body>
+</html>
