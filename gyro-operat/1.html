@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>摇一摇 - 基于重力感应</title>
+    <title>摇一摇---基于重力感应</title>
     <style>
         #box {
-            width: 200px;
-            height: 200px;
+            width: 50px;
+            height: 50px;
             background: orange;
             color: #fff;
             font-size: 20px;
+            position:absolute;
+            top: 50%;
+            left: 50%;
+            margin: -25px 0 0 -25px;
         }
     </style>
 </head>
@@ -22,42 +26,20 @@
     <script src="./js/m.Tween.js"></script>
     <script>
         (function () {
-            var lastX, lastY, lastZ;
-            var maxRange = 80;
-            var minRange = 10;
-            var isShake=false;
             var box = document.querySelector('#box');
-            // 摇一摇记录上一次的加速度，和当前次的加速度的差值，当差值大于一定幅度，就可以认定用户在摇一摇
+            css(box,'translateX',0);
             window.addEventListener('devicemotion', function (e) {
                 var motion = e.accelerationIncludingGravity;
                 var x = Math.round(motion.x);
                 var y = Math.round(motion.y);
                 var z = Math.round(motion.z);
-                var tx = css(box, 'translateX');
+                var tx=css(box,'translateX');
                 if (isAndroid()) {
                     x = -x;
                     y = -y;
                     z = -z;
                 }
-                if (typeof lastX == 'undefined') {
-                    lastX = x;
-                    lastY = y;
-                    lastZ = z;
-                    return;
-                }
-                var dis = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
-                if(dis>maxRange){
-                    isShake=true;
-                }
-                if(dis<minRange && isShake){
-                    // 执行摇一摇后要操作的内容
-                    isShake=false;
-                    alert('您之前进行了摇一摇操作哦');
-                }
-
-                lastX = x;
-                lastY = y;
-                lastZ = z;
+                css(box,'translateX',tx+x);
             });
         })();
 
