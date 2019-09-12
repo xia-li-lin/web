@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>陀螺仪 - 角度监测</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #view {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            -webkit-perspective: 300px;
+            perspective: 300px;
+        }
+
+        #box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 1024px;
+            height: 768px;
+            margin: -512px 0 0 -384px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            transition: .3s;
+        }
+
+        #box div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: center center no-repeat;
+            background-size: cover;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        #box div:nth-of-type(1) {
+            background-image: url('./images/img1.jpg');
+        }
+
+        #box div:nth-of-type(2) {
+            background-image: url('./images/img2.jpg');
+        }
+
+        #box div:nth-of-type(3) {
+            background-image: url('./images/img3.jpg');
+        }
+
+        #box div:nth-of-type(4) {
+            background-image: url('./images/img4.jpg');
+        }
+    </style>
+</head>
+
+<body>
+    <div id="view">
+        <div id="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <script src="./js/m.Tween.js"></script>
+    <script>
+        (function () {
+            var box = document.querySelector('#box');
+            var divs = box.querySelectorAll('div');
+            var start, last;
+            // css(box,'translateZ',-2000);
+            css(box, 'rotateY', 0);
+            for (var i = 0; i < divs.length; i++) {
+                css(divs[i], 'rotateY', i * 90);
+                css(divs[i], 'translateZ', -512);
+            }
+            // MTween({
+            //     el:box,
+            //     target:{
+            //         rotateY:360
+            //     },
+            //     time:2000,
+            //     type:'linear'
+            // });
+            window.addEventListener('deviceorientation', function (e) {
+                var x = Math.round(e.beta);
+                var y = Math.round(e.gamma);
+                var z = Math.round(e.alpha);
+
+                if (typeof start == "undefined") {
+                    start = y;
+                    last = start;
+                    return;
+                }
+                y = y - start;
+
+                if (Math.abs(y - last) > 5) {
+                    css(box, 'rotateY', y);
+                    last = y;
+                }
+
+            });
+        })();
+
+        function isAndroid() {
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+            // var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            return isAndroid;
+        }
+    </script>
+</body>
+
+</html>
