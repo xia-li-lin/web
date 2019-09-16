@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+    body{margin: 0;}
+    div{
+        height: 100px;
+        background: pink;
+    }
+    .row div{
+        height: 100px;
+        background: greenyellow;
+        box-sizing: border-box;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 100px;
+    }
+    </style>
+</head>
+
+<body>
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">1</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">2</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">3</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">4</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">5</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">6</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">7</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">8</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">9</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">10</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">11</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">12</div>
+    </div>
+</div> -->
+
+<!-- 列偏移 -->
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">1</div>
+        <div class="col-md-2 col-md-offset-2">2</div>
+    </div>
+</div> -->
+
+<!-- 列排序 -->
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2 col-md-push-6">1</div>
+        <div class="col-md-2 col-md-offset-2 col-md-pull-4">2</div>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2 col-md-push-6 hidden-xs">超小屏幕可见</div>
+        <div class="col-md-2 col-md-offset-2 col-md-pull-4">2</div>
+    </div>
+</div>
+</body>
+
+</html>
