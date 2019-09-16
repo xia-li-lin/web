@@ -22,7 +22,11 @@
     document.addEventListener('touchstart',function(e){
         e.preventDefault();
     },{passive:false});
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 642403ea3a3c3af8e8300f6282305d2994918aad
     window.onload=function(){
         var box=document.querySelector('#box');
 
@@ -31,6 +35,7 @@
         */
         box.addEventListener('gesturestart',function(e){
             this.style.background='orange';
+            box.innerHTML='1';
         });
 
         box.addEventListener('gesturechange',function(e){
@@ -39,6 +44,7 @@
 
         box.addEventListener('gestureend',function(e){
             this.style.background='greenyellow';
+            box.innerHTML='2';
         });
     }
     </script>
