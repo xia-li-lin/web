@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 200px auto;
+            -webkit-perspective: 800px;
+            perspective: 800px;
+        }
+        .div{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            transition: 3s;
+            -webkit-transform-origin: center center -150px;
+            transform-origin: center center -150px;
+        }
+        .box:hover .div{
+            -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+        }
+        .div div{
+            position: absolute;
+            left: 0;
+            top: 100px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform-origin: top;
+            transform-origin: top;
+            /* 
+                正n边形外角和=360；
+                正n边形外角=360/n;
+             */
+            -webkit-transform: rotateX(-36deg);
+            transform: rotateX(-36deg);
+        }
+        .div>div{
+            top: 0;
+            -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+        }
+        .div span{
+            width: 98px;
+            height: 98px;
+            display: block;
+            background: #ccc;
+            border: 1px solid #000;
+            text-align: center;
+            font: 50px/98px "宋体";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="div"></div>
+    </div>
+
+    <script>
+        function setLayout() {
+            var div = document.querySelector('.div');
+            var str = ``;
+            for (var i = 0; i < 10; i++) {
+                str = `<div><span>${9 - i}</span>${str}</div>`;
+            }
+            div.innerHTML = str;
+        }
+        setLayout();
+    </script>
+</body>
+
+</html>
