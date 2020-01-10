@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局</title>
+    <meta name="description" content="圣杯布局一般需求为两边等宽，中间自适应的三栏布局" />
+    <meta name="Keywords" content="圣杯布局">
+    <style>
+        body{
+            min-width: 600px;
+        }
+
+        #container {
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+
+        #container .column {
+            float: left;
+            height: 300px;
+        }
+
+        #center {
+            width: 100%;
+            background: red;
+        }
+
+        #left {
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            right: 200px;
+            background: greenyellow;
+        }
+
+        #right {
+            width: 200px;
+            background: plum;
+            margin-right: -200px;
+        }
+
+        #footer {
+            clear: both;
+        }
+
+        #header,
+        #footer {
+            height: 100px;
+            line-height: 100px;
+            background: #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">header</div>
+    <div id="container">
+        <div id="center" class="column"></div>
+        <div id="left" class="column"></div>
+        <div id="right" class="column"></div>
+    </div>
+    <div id="footer">footer</div>
+</body>
+
+</html>

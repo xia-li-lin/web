@@ -42,3 +42,24 @@
 
 ### 1、圣杯布局和双飞翼布局的理解和区别，并用代码实现
 
+**圣杯布局和双飞翼布局的理解：**
+
+- 两侧固定宽度，中间宽度自适应
+
+- 中间部分在DOM结构上优先，以便先行渲染
+
+- 允许三列中的任何一列成为最高列
+
+- 只需要使用一个额外的div
+
+  
+
+**圣杯布局和双飞翼布局的区别：**
+
+圣杯布局和双飞翼布局解决问题的方案在前一半是相同的即：三栏全部float浮动，但左右两栏加上负margin让其跟中间栏div并排，已形成三栏布局。
+
+不同在于解决“中间栏div内容不被遮挡”问题的思路不一样：
+
+圣杯布局，为了中间div内容不被遮挡，将中间div设置了左右padding-left和padding-right后，将左右两个div用相对布局position:relative分别配合right属性和left属性，以便左右两栏div移动后不遮挡中间。
+
+双飞翼布局，为了中间div内容不被遮挡，直接在div内部创建子div用于放置内容，在该子div里用margin-left和margin-right为左右两栏div流出位置。多了一个div，少用大致4个css属性（圣杯布局中间div，padding-left和padding-right这两个属性，加上左右两个div用相对布局position:relative及对应的right和left共四个属性，一共6个；而双飞翼布局子div里用matgin-left和margin-right共两个属性，6-2=4）比圣杯布局更直接和简洁一点。
